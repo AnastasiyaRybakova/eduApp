@@ -22,3 +22,4 @@ After cloning the application and installing all necessary libraries, you can ru
     $ streamlit run streamlit_app.py
 
 In the browser you'll see this application 
+<img width="840" alt="screenshot" src="https://github.com/AnastasiyaRybakova/eduApp/assets/37059842/7f10a5ed-df15-4317-b859-c085caebe201">
