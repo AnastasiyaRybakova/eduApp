@@ -95,11 +95,14 @@ def math_application():
     if st.button("Submit"):
         if user_answer == selected_solution:
             st.success("Correct!")
+            st.image("correct_image.png")
+            st.audio("correct_sound.mp3", format="audio/mp3", start_time=0)
         else:
             st.error("Incorrect!")
+            st.image("incorrect_image.png")
+            st.audio("incorrect_sound.mp3", format="audio/mp3", start_time=0)
             st.write(f"Hint: {selected_hint}")
         st.write(f"Explanation: {explanation}")
-        st.audio(f"{selected_solution}_solution.mp3", format="audio/mp3", start_time=0)
         st.video(video_path)
 
 # Function to display the color matching game
@@ -141,9 +144,13 @@ def color_matching_game():
             # Check if the user's input matches the actual color
             if user_color.lower() == row["Color Name"].lower():
                 st.write("Correct!")
+                st.image("correct_image.png")
+                st.audio("correct_sound.mp3", format="audio/mp3", start_time=0)
                 correct_matches += 1
             else:
                 st.write("Incorrect!")
+                st.image("incorrect_image.png")
+                st.audio("incorrect_sound.mp3", format="audio/mp3", start_time=0)
 
     # Display matching results
     st.write("Matching Results:")
@@ -171,9 +178,13 @@ def word_scramble_game():
 
     if st.button("Submit"):
         if user_guess.lower() == original_word.lower():
-            st.session_state.feedback = "Correct! Well done!"
+            st.session_state.feedback = "Correct! Well done!"               #cheering a child
+            st.image("correct_image.png")
+            st.audio("correct_sound.mp3", format="audio/mp3", start_time=0)
         else:
-            st.session_state.feedback = "Incorrect! Try again."
+            st.session_state.feedback = "Incorrect! Try again."             #cheering child
+            st.image("incorrect_image.png")
+            st.audio("incorrect_sound.mp3", format="audio/mp3", start_time=0)
         st.experimental_rerun()
 
     if st.session_state.feedback:
