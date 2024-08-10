@@ -41,8 +41,6 @@ math_problems = [
 
 # Placeholder for merged math problems
 merged_math_problems = []
-
-# Merge math problems from both sources
 merged_math_problems.extend(math_problems)
 
 # Function to select a random word and its corresponding data
@@ -95,26 +93,19 @@ def math_application():
     if st.button("Submit"):
         if user_answer == selected_solution:
             st.success("Correct!")
-            st.image("correct_image.png")
-            st.audio("correct_sound.mp3", format="audio/mp3", start_time=0)
         else:
             st.error("Incorrect!")
-            st.image("incorrect_image.png")
-            st.audio("incorrect_sound.mp3", format="audio/mp3", start_time=0)
             st.write(f"Hint: {selected_hint}")
         st.write(f"Explanation: {explanation}")
+        st.audio(f"{selected_solution}_solution.mp3", format="audio/mp3", start_time=0)
         st.video(video_path)
 
 # Function to display the color matching game
 def color_matching_game():
     st.header("Color Matching Game")
-    st.video("Colors.mp4")
     st.write("Match the colors by entering the correct color name.")
 
-    correct_matches = 0
-    total_matches = 0
-
-    # Create the data frame for color names and images
+    # Define colors and corresponding hex codes
     colors = {
         "Red": "#FE1E1E",
         "Orange": "#F19111",
@@ -128,36 +119,56 @@ def color_matching_game():
         "Pink": "#FFB6C1"
     }
 
-    color_df = pd.DataFrame(colors.items(), columns=["Color Name", "Color Image"])
-    color_df["Color Image"] = color_df["Color Name"].apply(lambda x: f"{x.lower()}.png")
-
+    # Create a DataFrame for color names and images
+    color_df = pd.DataFrame(colors.items(), columns=["Color Name", "Color Hex"])
     # Shuffle the colors
     color_df = color_df.sample(frac=1).reset_index(drop=True)
 
-    # Display color images and get user input for color names
-    for index, row in color_df.iterrows():
-        st.image(row["Color Image"], width=100)
-        user_color = st.text_input("Enter color name:", key=index)
+    # Initialize session state variables if they don't exist
+    if "total_matches" not in st.session_state:
+        st.session_state.total_matches = 0
+        st.session_state.correct_matches = 0
+        st.session_state.color_df = color_df
+        st.session_state.feedback = [""] * len(color_df)  # Initialize feedback list with empty strings
 
-        if st.button("Submit", key=f"submit_{index}"):
-            total_matches += 1
-            # Check if the user's input matches the actual color
-            if user_color.lower() == row["Color Name"].lower():
-                st.write("Correct!")
-                st.image("correct_image.png")
-                st.audio("correct_sound.mp3", format="audio/mp3", start_time=0)
-                correct_matches += 1
-            else:
-                st.write("Incorrect!")
-                st.image("incorrect_image.png")
-                st.audio("incorrect_sound.mp3", format="audio/mp3", start_time=0)
+    # Ensure feedback list is not None and matches the length of color_df
+    if st.session_state.feedback is None or len(st.session_state.feedback) != len(st.session_state.color_df):
+        st.session_state.feedback = [""] * len(st.session_state.color_df)
+
+    # Display color images and get user input for color names
+    for index, row in st.session_state.color_df.iterrows():
+        col1, col2 = st.columns([2, 1])
+        with col1:
+            st.image(f"https://via.placeholder.com/100/{row['Color Hex'].replace('#', '')}/000000?text=", width=100)
+        with col2:
+            user_color = st.text_input(f"Enter color name:", key=f"user_color_{index}")
+
+            if st.button(f"Submit", key=f"submit_{index}"):
+                st.session_state.total_matches += 1
+                if user_color.lower() == row["Color Name"].lower():
+                    st.session_state.correct_matches += 1
+                    st.session_state.feedback[index] = "Correct!"
+                else:
+                    st.session_state.feedback[index] = "Incorrect!"
+                st.experimental_rerun()
 
     # Display matching results
     st.write("Matching Results:")
-    st.write(f"Total Matches: {total_matches}")
-    st.write(f"Correct Matches: {correct_matches}")
+    st.write(f"Total Matches: {st.session_state.total_matches}")
+    st.write(f"Correct Matches: {st.session_state.correct_matches}")
 
-# Function to display the word scramble game
+    # Display feedback for each color block
+    for index, feedback in enumerate(st.session_state.feedback):
+        st.write(f"Block {index+1}: {feedback}")
+
+    # Option to reset game
+    if st.button("Reset Game"):
+        st.session_state.total_matches = 0
+        st.session_state.correct_matches = 0
+        st.session_state.color_df = color_df.sample(frac=1).reset_index(drop=True)
+        st.session_state.feedback = [""] * len(st.session_state.color_df)  # Reset feedback list
+        st.experimental_rerun()
+
 def word_scramble_game():
     st.header("Word Scramble Game")
     st.write("Look at the image and unscramble the word below.")
@@ -167,24 +178,31 @@ def word_scramble_game():
         st.session_state.current_image, st.session_state.current_data = select_word()
         st.session_state.scrambled_word = scramble_word(st.session_state.current_data["word"])
         st.session_state.feedback = None
+        st.session_state.user_guess = ""  # Initialize user guess
+        st.session_state.answers = []  # Initialize answers list
+
+    # Ensure all necessary session_state variables are initialized
+    if "user_guess" not in st.session_state:
+        st.session_state.user_guess = ""
+    if "answers" not in st.session_state:
+        st.session_state.answers = []
 
     original_word = st.session_state.current_data["word"]
     scrambled_word = st.session_state.scrambled_word
-    
+
     st.image(st.session_state.current_image, caption="Image for reference")
     st.write(f"Scrambled Word: {' '.join(scrambled_word)}")
 
-    user_guess = st.text_input("Unscramble the word:")
+    user_guess = st.text_input("Unscramble the word:", value=st.session_state.user_guess)
 
     if st.button("Submit"):
         if user_guess.lower() == original_word.lower():
-            st.session_state.feedback = "Correct! Well done!"               #cheering a child
-            st.image("correct_image.png")
-            st.audio("correct_sound.mp3", format="audio/mp3", start_time=0)
+            st.session_state.feedback = "Correct! Well done!"
+            st.session_state.answers.append({"word": original_word, "guess": user_guess, "correct": True})
         else:
-            st.session_state.feedback = "Incorrect! Try again."             #cheering child
-            st.image("incorrect_image.png")
-            st.audio("incorrect_sound.mp3", format="audio/mp3", start_time=0)
+            st.session_state.feedback = "Incorrect! Try again."
+            st.session_state.answers.append({"word": original_word, "guess": user_guess, "correct": False})
+        st.session_state.user_guess = user_guess  # Save user guess
         st.experimental_rerun()
 
     if st.session_state.feedback:
@@ -193,7 +211,22 @@ def word_scramble_game():
             st.session_state.current_image, st.session_state.current_data = select_word()
             st.session_state.scrambled_word = scramble_word(st.session_state.current_data["word"])
             st.session_state.feedback = None
+            st.session_state.user_guess = ""  # Clear previous user guess
             st.experimental_rerun()
+
+    # Option to view collected data
+    if st.button("View Data"):
+        st.write("Collected Data:")
+        st.write(pd.DataFrame(st.session_state.answers))
+
+    # Option to reset game
+    if st.button("Reset Game"):
+        st.session_state.current_image, st.session_state.current_data = select_word()
+        st.session_state.scrambled_word = scramble_word(st.session_state.current_data["word"])
+        st.session_state.feedback = None
+        st.session_state.user_guess = ""  # Clear previous user guess
+        st.session_state.answers = []  # Clear collected data
+        st.experimental_rerun()
 
 
 # Main application logic
