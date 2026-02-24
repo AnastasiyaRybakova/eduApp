@@ -77,9 +77,10 @@ The development and evaluation of this application and the broader Child–Robot
 
 - **Rybakova, A., & Choi, J. (2025).** *Evaluating the Effectiveness of Social Robots in Enhancing English Language Acquisition and Educational Engagement: A Study with Adults and Its Implications for Korean Kindergarten Children.* In *HCI International 2025 (HCII 2025)*, Springer. https://doi.org/10.1007/978-3-031-93861-0_21
 
-## Citation
-
-If you use this repository in research, please cite the papers listed in **Related Publications**.
 - **Rybakova, A., & Choi, J. (2025).** *A multi-modal embodied robot framework for English as a second language learning in preschoolers: Design and evaluation.* *Robotica.* Published online 29 Oct 2025. https://doi.org/10.1017/S0263574725102646 
 
 - **Rybakova, A., & Choi, J. (2026).** *From traditional to robot-assisted learning: A multimodal robot-assisted learning framework for enhancing English acquisition in Korean preschoolers.* *Intelligent Service Robotics, 19*, 30. https://doi.org/10.1007/s11370-025-00685-z
+
+## Citation
+
+If you use this repository in research, please cite the papers listed in **Related Publications**.
