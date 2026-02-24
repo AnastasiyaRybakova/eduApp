@@ -5,7 +5,7 @@ eduApp is a lightweight Streamlit-based educational application designed for pre
 It supports vocabulary learning with images + audio, simple math practice, color matching, and a word scramble activity.
 This app is used as the tablet interface module in a broader Child–Robot Interaction (CRI) / Robot-Assisted Language Learning (RALL) workflow.
 
-### The application is focused on several skills:
+### Features:
 - Using the images (20 of them) for learning English;
 - Various number of the Math problems;
 - Color matching task;
@@ -13,12 +13,13 @@ This app is used as the tablet interface module in a broader Child–Robot Inter
 
 ## Dependencies
 
+This application requires:
+
 - Python 3.8+
 - Streamlit
-- Pillow
-- Pandas
 
-## To run the application you can follow next steps
+
+## Installation:
 
 ### Install Streamlit locally:
 (use the docs of streamlit [here](https://streamlit.io/))
@@ -30,8 +31,11 @@ After cloning the application and installing all necessary libraries, you can ru
 
     $ streamlit run streamlit_app.py
 
+
 In the browser you'll see this application 
 <img width="840" alt="screenshot" src="https://github.com/AnastasiyaRybakova/eduApp/assets/37059842/7f10a5ed-df15-4317-b859-c085caebe201">
+
+A screenshot showing the main interface of the application.
 
 ## The next stage is the integration to ROS system: 
 
