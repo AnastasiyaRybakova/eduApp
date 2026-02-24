@@ -55,8 +55,11 @@ In the browser you'll see this application
 
 ## Project Structure
 
-- `streamlit_app.py` — Main Streamlit application file
-- `assets/` — Images, audio, and media files used in learning tasks
+- `streamlit_app.py` — main Streamlit app entry point
+- `*.jpg` — vocabulary images
+- `*_word.mp3`, `*_sentence.mp3` — audio for words and example sentences
+- `*.mp4` — media used in math/color activities (if applicable)
+- `README.md` — documentation
 
 ## Research Context
 
@@ -64,13 +67,15 @@ This application was developed as part of a multi-modal Robot-Assisted Language 
 It is used in structured experimental sessions combining tablet interaction and embodied robot-based activities.
 The repository contains software only and does not include participant data.
 
-
 ## Related Publications
 
 The development and evaluation of this application and the broader Child–Robot Interaction / Robot-Assisted Language Learning framework are described in the following peer-reviewed works:
 
 - **Rybakova, A., & Choi, J. (2025).** *Evaluating the Effectiveness of Social Robots in Enhancing English Language Acquisition and Educational Engagement: A Study with Adults and Its Implications for Korean Kindergarten Children.* In *HCI International 2025 (HCII 2025)*, Springer. https://doi.org/10.1007/978-3-031-93861-0_21
 
+## Citation
+
+If you use this repository in research, please cite the papers listed in **Related Publications**.
 - **Rybakova, A., & Choi, J. (2025).** *A multi-modal embodied robot framework for English as a second language learning in preschoolers: Design and evaluation.* *Robotica.* Published online 29 Oct 2025. https://doi.org/10.1017/S0263574725102646 
 
 - **Rybakova, A., & Choi, J. (2026).** *From traditional to robot-assisted learning: A multimodal robot-assisted learning framework for enhancing English acquisition in Korean preschoolers.* *Intelligent Service Robotics, 19*, 30. https://doi.org/10.1007/s11370-025-00685-z
