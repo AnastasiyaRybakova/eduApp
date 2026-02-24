@@ -11,6 +11,13 @@ This app is used as the tablet interface module in a broader Child–Robot Inter
 - Color matching task;
 - Scramble words game to consolidate knowledge of the first part of the application English Vocabulary
 
+## Dependencies
+
+- Python 3.8+
+- Streamlit
+- Pillow
+- Pandas
+
 ## To run the application you can follow next steps
 
 ### Install Streamlit locally:
@@ -57,12 +64,6 @@ This application was developed as part of a multi-modal Robot-Assisted Language 
 It is used in structured experimental sessions combining tablet interaction and embodied robot-based activities.
 The repository contains software only and does not include participant data.
 
-## Dependencies
-
-- Python 3.8+
-- Streamlit
-- Pillow
-- Pandas
 
 ## Related Publications
 
