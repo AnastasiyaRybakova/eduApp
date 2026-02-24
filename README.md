@@ -21,7 +21,7 @@ This app is used as the tablet interface module in a broader Child–Robot Inter
 ## To run the application you can follow next steps
 
 ### Install Streamlit locally:
-(use the docs of streamlit [here](https://pages.github.com/))
+(use the docs of streamlit [here](https://streamlit.io/))
 
     $ pip install streamlit
     $ streamlit hello
