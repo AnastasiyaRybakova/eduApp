@@ -50,8 +50,6 @@ In the browser you'll see this application
 
 - `streamlit_app.py` — Main Streamlit application file
 - `assets/` — Images, audio, and media files used in learning tasks
-- `requirements.txt` — Python dependencies
-- `docs/` — Supplementary documentation (screenshots, diagrams)
 
 ## Research Context
 
